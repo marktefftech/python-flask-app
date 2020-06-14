@@ -4,6 +4,7 @@ from flask_restful import Resource, Api, reqparse
 app = Flask(__name__)
 api = Api(app)
 
+# todo: Move this to a database
 STUDENTS = {
     '1': {'name': 'Mark', 'age': 22, 'spec': 'Math'},
     '2': {'name': 'Jane', 'age': 20, 'spec': 'History'},
@@ -13,10 +14,13 @@ STUDENTS = {
 
 parser = reqparse.RequestParser()
 
+# Class for getting all students or creating an individual student
 class StudentsList(Resource):
+    # Get all students
     def get(self):
         return STUDENTS
 
+    # Create student
     def post(self):
         parser.add_argument("name")
         parser.add_argument("age")
